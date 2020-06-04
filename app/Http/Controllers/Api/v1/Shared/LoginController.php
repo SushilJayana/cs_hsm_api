@@ -13,12 +13,12 @@ class LoginController extends ApiBaseController
         try{
             $login = $request->validate(['username' => 'required|string', 'password' => 'required|string']);
 
-            if (!Auth::attempt($login)) return response(['message' => 'Invalid credentials', 'status' => 'error']);
+            if (!Auth::attempt($login)) return $this->respondWithError("Invalid Credentials", $request->username);
 
             $accessToken = Auth::user()->createToken('authToken')->accessToken;
-            return response(['message' => 'Token generated', 'status' => 'success', 'access_token' => $accessToken]);
+            return $this->respondWithMessage('Token generated.', $accessToken);
         } catch (\Exception $exception) {
-            return response(['message' => $exception->getMessage(), 'status' => 'error']);
+            return $this->respondWithError("Exception", $exception->getMessage());
         }
     }
 }
