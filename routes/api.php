@@ -2,8 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 
+Route::post('user','Api\v1\Application\UserController@store');
 
-Route::resource('user', 'Api\v1\Application\UserController');
 
 Route::post('/login', 'Api\v1\Shared\LoginController@login')->name('login');
 
