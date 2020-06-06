@@ -21,7 +21,7 @@ class UserValidator extends LaravelValidator
         ValidatorInterface::RULE_CREATE => [
             "name" => ["required"],
             "username" => ["required","unique:hsm_users"],
-            "email" => ["required"],
+            "email" => ["required","email"],
             "password" => ["required"],
             "age" => ["required", "numeric"],
             "gender" => ["required"],
@@ -33,7 +33,7 @@ class UserValidator extends LaravelValidator
         ],
         ValidatorInterface::RULE_UPDATE => ["name" => ["required"],
             "username" => ["sometimes|required"],
-            "email" => ["required"],
+            "email" => ["required","email"],
             "password" => ["required"],
             "age" => ["required", "numeric"],
             "gender" => ["required"],
