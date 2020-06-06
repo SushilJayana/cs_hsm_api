@@ -17,4 +17,8 @@ Route::group(['middleware' => ['auth:api', 'role:faculty']], function () {
     });
 });
 
+Route::get('/hey',function (){
+   return 'hey';
+});
+
 

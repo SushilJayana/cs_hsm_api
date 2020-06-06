@@ -43,6 +43,7 @@ class UserController extends ApiBaseController
             try {
                 $this->userValidator->with($request->all())->passesOrFail(ValidatorInterface::RULE_CREATE);
                 $request['password'] = Hash::make($request->password);
+                return 'hello';
                 $payload = $this->userRepository->create($request->all());
                 if ($payload) $payload->assignRole($request->user_type);
                 return $this->respondWithMessage('Successfully created user.', $payload);
@@ -83,7 +84,7 @@ class UserController extends ApiBaseController
     public function update(Request $request, $id)
     {
         try {
-            $this->userValidator->with($request->all())->passesOrFail(ValidatorInterface::RULE_UPDATE);
+            $this->userValidator->with($request->all())->setId($id)->passesOrFail(ValidatorInterface::RULE_UPDATE);
             $request['password'] = ($request->password) ? Hash::make($request->password) : "";
             $payload = $this->userRepository->update($request->all(), $id);
             return $this->respondWithMessage('Successfully updated user.', $payload);
