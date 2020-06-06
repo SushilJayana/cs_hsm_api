@@ -1,6 +1,8 @@
 <?php
 
+use App\Entities\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class DefaultSystemUser extends Seeder
 {
@@ -11,11 +13,11 @@ class DefaultSystemUser extends Seeder
      */
     public function run()
     {
-        $user = [
+        $admin_user = User::create([
             "name" => "admin",
             "username" => "admin",
             "email" => "admin@admin.com",
-            "password" => "admin123",
+            "password" => Hash::make("admin123"),
             "age" => 1,
             "gender" => "MALE",
             "photo" => "admin",
@@ -27,10 +29,9 @@ class DefaultSystemUser extends Seeder
             "guardian_contact" => 987654321,
             "guardian_occupation" => "admin",
             "created_by" => 1,
-            "updated_by" => 1,
-            "user_type" => "administrator"
-        ];
+            "updated_by" => 1
+        ]);
 
-        \Illuminate\Foundation\Auth\User::save($user);
+        $admin_user->assignRole('administrator');
     }
 }
