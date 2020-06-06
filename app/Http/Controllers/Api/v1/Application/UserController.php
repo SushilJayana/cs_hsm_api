@@ -43,7 +43,6 @@ class UserController extends ApiBaseController
             try {
                 $this->userValidator->with($request->all())->passesOrFail(ValidatorInterface::RULE_CREATE);
                 $request['password'] = Hash::make($request->password);
-                return 'hello';
                 $payload = $this->userRepository->create($request->all());
                 if ($payload) $payload->assignRole($request->user_type);
                 return $this->respondWithMessage('Successfully created user.', $payload);
