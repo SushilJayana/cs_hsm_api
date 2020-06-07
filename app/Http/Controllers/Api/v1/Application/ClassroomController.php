@@ -22,6 +22,7 @@ class ClassroomController extends ApiBaseController
         $this->classroomRepository = $classroomRepository;
         $this->classroomValidator = $classroomValidator;
         $this->classroomCriteria = $classroomCriteria;
+        $this->classroomRepository->pushCriteria($this->classroomCriteria);
     }
 
     /**
@@ -30,7 +31,6 @@ class ClassroomController extends ApiBaseController
      */
     public function index()
     {
-
         $data = $this->classroomRepository->all();
         return $this->respondWithMessage('payload', $data);
     }

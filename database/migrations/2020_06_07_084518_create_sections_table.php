@@ -21,6 +21,7 @@ class CreateSectionsTable extends Migration
             $table->string('slug',25)->unique();
             $table->integer('created_by')->nullable();
             $table->integer('updated_by')->nullable();
+            $table->softDeletes();
             $table->timestamps();
 		});
 	}

@@ -33,6 +33,7 @@ class CreateFacultiesTable extends Migration
             $table->string('guardian_occupation',30)->nullable();
             $table->integer('created_by')->nullable();
             $table->integer('updated_by')->nullable();
+            $table->softDeletes();
             $table->timestamps();
 		});
 	}

@@ -22,6 +22,7 @@ class ClassroomCriteria implements CriteriaInterface
      */
     public function apply($model, RepositoryInterface $repository)
     {
+        $model = $model->withoutTrashed();
         return $model;
     }
 }

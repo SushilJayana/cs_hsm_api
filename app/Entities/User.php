@@ -2,6 +2,7 @@
 
 namespace App\Entities;
 
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Laravel\Passport\HasApiTokens;
 use Prettus\Repository\Contracts\Transformable;
 use Prettus\Repository\Traits\TransformableTrait;
@@ -15,7 +16,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  */
 class User extends Authenticatable implements Transformable
 {
-    use TransformableTrait,HasRoles,HasApiTokens;
+    use TransformableTrait,HasRoles,HasApiTokens,SoftDeletes;
     /**
      * The attributes that are mass assignable.
      *`

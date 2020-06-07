@@ -22,6 +22,7 @@ class FacultyController extends ApiBaseController
         $this->facultyRepository = $facultyRepository;
         $this->facultyValidator = $facultyValidator;
         $this->facultyCriteria = $facultyCriteria;
+        $this->facultyRepository->pushCriteria($this->facultyCriteria);
     }
 
     /**

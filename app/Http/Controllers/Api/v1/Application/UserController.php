@@ -23,6 +23,7 @@ class UserController extends ApiBaseController
         $this->userRepository = $userRepository;
         $this->userValidator = $userValidator;
         $this->userCriteria = $userCriteria;
+        $this->userRepository->pushCriteria($this->userCriteria);
     }
 
     /**

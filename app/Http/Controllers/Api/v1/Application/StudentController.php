@@ -22,6 +22,7 @@ class StudentController extends ApiBaseController
         $this->studentRepository = $studentRepository;
         $this->studentValidator = $studentValidator;
         $this->studentCriteria = $studentCriteria;
+        $this->studentRepository->pushCriteria($this->studentCriteria);
     }
 
     /**

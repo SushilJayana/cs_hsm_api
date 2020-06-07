@@ -22,6 +22,7 @@ class SectionController extends ApiBaseController
         $this->sectionRepository = $sectionRepository;
         $this->sectionValidator = $sectionValidator;
         $this->sectionCriteria = $sectionCriteria;
+        $this->sectionRepository->pushCriteria($this->sectionCriteria);
     }
 
     /**
