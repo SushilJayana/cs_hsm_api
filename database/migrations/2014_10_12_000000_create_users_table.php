@@ -14,24 +14,19 @@ class CreateUsersTable extends Migration
     public function up()
     {
         Schema::create('hsm_users', function (Blueprint $table) {
-            $table->id()->autoIncrement();
-            $table->string('name',50);
-            $table->string('username',50)->unique();
-            $table->string('email')->unique();
+            $table->increments('id');
+            $table->string('name', 50);
+            $table->string('username', 50)->unique();
+            $table->string('email',50)->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->smallInteger('age')->nullable();
-            $table->enum('gender',['MALE','FEMALE','OTHER']);
-            $table->string('photo',25);
-            $table->timestamp('dob')->nullable();
-            $table->string('nationality',20)->nullable();
-            $table->string('address');
+            $table->string('user_type',50);
+            $table->integer('user_id')->nullable();
+            $table->string('photo', 25)->nullable();
+            $table->string('address',100);
             $table->bigInteger('contact');
-            $table->string('guardian_name',50)->nullable();
-            $table->bigInteger('guardian_contact')->nullable();
-            $table->string('guardian_occupation',50)->nullable();
-            $table->tinyInteger('created_by');
-            $table->tinyInteger('updated_by');
+            $table->integer('created_by')->nullable();
+            $table->integer('updated_by')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

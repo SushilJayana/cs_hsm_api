@@ -6,16 +6,16 @@ use Prettus\Repository\Contracts\CriteriaInterface;
 use Prettus\Repository\Contracts\RepositoryInterface;
 
 /**
- * Class UserCriteria.
+ * Class ClassroomCriteria.
  *
  * @package namespace App\Criteria;
  */
-class UserCriteria implements CriteriaInterface
+class ClassroomCriteria implements CriteriaInterface
 {
     /**
      * Apply criteria in query repository
      *
-     * @param string $model
+     * @param string              $model
      * @param RepositoryInterface $repository
      *
      * @return mixed

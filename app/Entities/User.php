@@ -26,10 +26,8 @@ class User extends Authenticatable implements Transformable
     protected $table = "hsm_users";
 
     protected $fillable = [
-        'username', 'email', 'password',
-        'name', 'age', 'gender', 'photo', 'dob', 'nationality','address','contact',
-        'guardian_name','guardian_contact', 'guardian_occupation',
-        'created_by', 'updated_by'
+        'name', 'username', 'email', 'password','user_type','user_type_id',
+        'photo', 'address','contact', 'created_by', 'updated_by'
     ];
 
 

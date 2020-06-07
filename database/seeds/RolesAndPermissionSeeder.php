@@ -14,8 +14,9 @@ class RolesAndPermissionSeeder extends Seeder
     {
         // Reset cached roles and permissions
         app()['cache']->forget('spatie.permission.cache');
-        Role::create(['name' => 'administrator', 'guard_name' => 'api']);
-        Role::create(['name' => 'faculty', 'guard_name' => 'api']);
-        Role::create(['name' => 'student', 'guard_name' => 'api']);
+        $sys_user_type = explode(',', trim(env('SYS_USER_TYPE')));
+        foreach ($sys_user_type as $user_type) {
+            Role::create(['name' => $user_type, 'guard_name' => 'api']);
+        }
     }
 }

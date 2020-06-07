@@ -6,11 +6,11 @@ use \Prettus\Validator\Contracts\ValidatorInterface;
 use \Prettus\Validator\LaravelValidator;
 
 /**
- * Class UserValidator.
+ * Class StudentValidator.
  *
  * @package namespace App\Validators;
  */
-class UserValidator extends LaravelValidator
+class StudentValidator extends LaravelValidator
 {
     /**
      * Validation Rules
@@ -20,24 +20,25 @@ class UserValidator extends LaravelValidator
     protected $rules = [
         ValidatorInterface::RULE_CREATE => [
             "name" => ["required"],
-            "username" => ["required", "unique:hsm_users"],
-            "email" => ["required", "email"],
-            "password" => ["required"],
+            "class_section_id" => ["required"],
+            "gender" => ["required"],
             "address" => ["required"],
             "contact" => ["required", "numeric"],
-            "user_type" => ["required"],
-            "created_by" => ["required","numeric"],
+            "guardian_name" => ["required"],
+            "guardian_contact" => ["required", "numeric"],
+            "guardian_address" => ["required"],
+            "created_by" => ["required", "numeric"],
         ],
         ValidatorInterface::RULE_UPDATE => [
             "name" => ["sometimes|required"],
-            "username" => ["sometimes|required"],
-            "email" => ["sometimes|required", "email"],
-            "password" => ["sometimes|required"],
+            "class_section_id" => ["sometimes|required"],
+            "gender" => ["sometimes|required"],
             "address" => ["sometimes|required"],
             "contact" => ["sometimes|required", "numeric"],
-            "user_type" => ["sometimes|required"],
+            "guardian_name" => ["sometimes|required"],
+            "guardian_contact" => ["sometimes|required", "numeric"],
+            "guardian_address" => ["sometimes|required"],
             "updated_by" => ["required","numeric"],
         ],
     ];
 }
-

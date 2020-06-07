@@ -2,27 +2,26 @@
 
 namespace App\Http\Controllers\Api\v1\Application;
 
-use App\Criteria\UserCriteria;
-use App\Repositories\UserRepository;
-use App\Validators\UserValidator;
+use App\Criteria\ClassroomCriteria;
+use App\Repositories\ClassroomRepository;
+use App\Validators\ClassroomValidator;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
 use Prettus\Validator\Contracts\ValidatorInterface;
 use Prettus\Validator\Exceptions\ValidatorException;
 use App\Http\Controllers\Api\v1\Shared\ApiBaseController;
 
 
-class UserController extends ApiBaseController
+class SectionController extends ApiBaseController
 {
-    protected $userRepository;
-    protected $userValidator;
-    protected $userCriteria;
+    protected $sectionRepository;
+    protected $sectionValidator;
+    protected $sectionCriteria;
 
-    public function __construct(UserRepository $userRepository, UserValidator $userValidator, UserCriteria $userCriteria)
+    public function __construct(ClassroomRepository $sectionRepository, ClassroomValidator $sectionValidator, ClassroomCriteria $sectionCriteria)
     {
-        $this->userRepository = $userRepository;
-        $this->userValidator = $userValidator;
-        $this->userCriteria = $userCriteria;
+        $this->sectionRepository = $sectionRepository;
+        $this->sectionValidator = $sectionValidator;
+        $this->sectionCriteria = $sectionCriteria;
     }
 
     /**
@@ -32,7 +31,7 @@ class UserController extends ApiBaseController
     public function index()
     {
 
-        $data = $this->userRepository->all();
+        $data = $this->sectionRepository->all();
         return $this->respondWithMessage('payload', $data);
     }
 
@@ -45,11 +44,9 @@ class UserController extends ApiBaseController
     {
         try {
             try {
-                $this->userValidator->with($request->all())->passesOrFail(ValidatorInterface::RULE_CREATE);
-                $request['password'] = Hash::make($request->password);
-                $payload = $this->userRepository->create($request->all());
-                if ($payload) $payload->assignRole($request->user_type);
-                return $this->respondWithMessage('Successfully created user.', $payload);
+                $this->sectionValidator->with($request->all())->passesOrFail(ValidatorInterface::RULE_CREATE);
+                $payload = $this->sectionRepository->create($request->all());
+                return $this->respondWithMessage('Successfully created section.', $payload);
             } catch (ValidatorException $exception) {
                 return $this->respondWithError("Validator's Exception", $exception->getMessageBag());
             }
@@ -77,10 +74,9 @@ class UserController extends ApiBaseController
     public function update(Request $request, $id)
     {
         try {
-            $this->userValidator->with($request->all())->setId($id)->passesOrFail(ValidatorInterface::RULE_UPDATE);
-            $request['password'] = ($request->password) ? Hash::make($request->password) : "";
-            $payload = $this->userRepository->update($request->all(), $id);
-            return $this->respondWithMessage('Successfully updated user.', $payload);
+            $this->sectionValidator->with($request->all())->setId($id)->passesOrFail(ValidatorInterface::RULE_UPDATE);
+            $payload = $this->sectionRepository->update($request->all(), $id);
+            return $this->respondWithMessage('Successfully updated section.', $payload);
         } catch (\Exception $exception) {
             return $this->respondWithError("Exception", $exception->getMessage());
         }
@@ -94,8 +90,8 @@ class UserController extends ApiBaseController
     public function destroy($id)
     {
         try {
-            $isDeleted = $this->userRepository->delete($id);
-            return $this->respondWithMessage('Successfully deleted user.', $isDeleted);
+            $isDeleted = $this->sectionRepository->delete($id);
+            return $this->respondWithMessage('Successfully deleted section.', $isDeleted);
         } catch (\Exception $exception) {
             return $this->respondWithError("Exception", $exception->getMessage());
         }
