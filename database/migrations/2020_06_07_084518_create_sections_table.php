@@ -18,7 +18,7 @@ class CreateSectionsTable extends Migration
 		Schema::create('hsm_sections', function(Blueprint $table) {
             $table->increments('id');
             $table->string('name',25);
-            $table->string('slug',25);
+            $table->string('slug',25)->unique();
             $table->integer('created_by')->nullable();
             $table->integer('updated_by')->nullable();
             $table->timestamps();

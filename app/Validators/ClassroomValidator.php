@@ -24,8 +24,8 @@ class ClassroomValidator extends LaravelValidator
             "created_by" => ["required", "numeric"],
         ],
         ValidatorInterface::RULE_UPDATE => [
-            "name" => ["sometimes|required"],
-            "slug" => ["sometimes|required"],
+            "name" => ["sometimes","required"],
+            "slug" => ["sometimes","required"],
             "updated_by" => ["required","numeric"],
         ],
     ];

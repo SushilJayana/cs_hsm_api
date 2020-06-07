@@ -9,7 +9,7 @@ use Illuminate\Database\Migrations\Migration;
 class CreateClassroomsTable extends Migration
 {
 	/**
-	 * Run the migrations.
+	 * Run the migrations.c
 	 *
 	 * @return void
 	 */
@@ -18,7 +18,7 @@ class CreateClassroomsTable extends Migration
 		Schema::create('hsm_classrooms', function(Blueprint $table) {
             $table->increments('id');
             $table->string('name',25);
-            $table->string('slug',25);
+            $table->string('slug',25)->unique();
             $table->integer('created_by')->nullable();
             $table->integer('updated_by')->nullable();
             $table->timestamps();
