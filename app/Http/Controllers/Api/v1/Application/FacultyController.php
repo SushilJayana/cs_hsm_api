@@ -52,7 +52,7 @@ class FacultyController extends ApiBaseController
                 return $this->respondWithError("Validator's Exception", $exception->getMessageBag());
             }
         } catch (\Exception $exception) {
-            return $this->respondWithError("Exception", $exception->getMessage());
+              return $this->respondWithError( $exception->getMessage());
         }
     }
 
@@ -79,7 +79,7 @@ class FacultyController extends ApiBaseController
             $payload = $this->facultyRepository->update($request->all(), $id);
             return $this->respondWithMessage('Successfully updated faculty.', $payload);
         } catch (\Exception $exception) {
-            return $this->respondWithError("Exception", $exception->getMessage());
+              return $this->respondWithError( $exception->getMessage());
         }
     }
 
@@ -94,7 +94,7 @@ class FacultyController extends ApiBaseController
             $isDeleted = $this->facultyRepository->delete($id);
             return $this->respondWithMessage('Successfully deleted student.', $isDeleted);
         } catch (\Exception $exception) {
-            return $this->respondWithError("Exception", $exception->getMessage());
+              return $this->respondWithError( $exception->getMessage());
         }
     }
 

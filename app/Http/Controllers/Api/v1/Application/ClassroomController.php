@@ -51,7 +51,7 @@ class ClassroomController extends ApiBaseController
                 return $this->respondWithError("Validator's Exception", $exception->getMessageBag());
             }
         } catch (\Exception $exception) {
-            return $this->respondWithError("Exception", $exception->getMessage());
+            return $this->respondWithError( $exception->getMessage());
         }
     }
 
@@ -78,7 +78,7 @@ class ClassroomController extends ApiBaseController
             $payload = $this->classroomRepository->update($request->all(), $id);
             return $this->respondWithMessage('Successfully updated classroom.', $payload);
         } catch (\Exception $exception) {
-            return $this->respondWithError("Exception", $exception->getMessage());
+              return $this->respondWithError( $exception->getMessage());
         }
     }
 
@@ -93,7 +93,7 @@ class ClassroomController extends ApiBaseController
             $isDeleted = $this->classroomRepository->delete($id);
             return $this->respondWithMessage('Successfully deleted classroom.', $isDeleted);
         } catch (\Exception $exception) {
-            return $this->respondWithError("Exception", $exception->getMessage());
+              return $this->respondWithError( $exception->getMessage());
         }
     }
 

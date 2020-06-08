@@ -52,7 +52,7 @@ class SectionController extends ApiBaseController
                 return $this->respondWithError("Validator's Exception", $exception->getMessageBag());
             }
         } catch (\Exception $exception) {
-            return $this->respondWithError("Exception", $exception->getMessage());
+             return $this->respondWithError( $exception->getMessage());
         }
     }
 
@@ -79,7 +79,7 @@ class SectionController extends ApiBaseController
             $payload = $this->sectionRepository->update($request->all(), $id);
             return $this->respondWithMessage('Successfully updated section.', $payload);
         } catch (\Exception $exception) {
-            return $this->respondWithError("Exception", $exception->getMessage());
+             return $this->respondWithError( $exception->getMessage());
         }
     }
 
@@ -94,7 +94,7 @@ class SectionController extends ApiBaseController
             $isDeleted = $this->sectionRepository->delete($id);
             return $this->respondWithMessage('Successfully deleted section.', $isDeleted);
         } catch (\Exception $exception) {
-            return $this->respondWithError("Exception", $exception->getMessage());
+             return $this->respondWithError( $exception->getMessage());
         }
     }
 

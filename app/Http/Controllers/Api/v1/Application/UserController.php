@@ -55,7 +55,7 @@ class UserController extends ApiBaseController
                 return $this->respondWithError("Validator's Exception", $exception->getMessageBag());
             }
         } catch (\Exception $exception) {
-            return $this->respondWithError("Exception", $exception->getMessage());
+              return $this->respondWithError( $exception->getMessage());
         }
     }
 
@@ -83,7 +83,7 @@ class UserController extends ApiBaseController
             $payload = $this->userRepository->update($request->all(), $id);
             return $this->respondWithMessage('Successfully updated user.', $payload);
         } catch (\Exception $exception) {
-            return $this->respondWithError("Exception", $exception->getMessage());
+              return $this->respondWithError( $exception->getMessage());
         }
     }
 
@@ -98,7 +98,7 @@ class UserController extends ApiBaseController
             $isDeleted = $this->userRepository->delete($id);
             return $this->respondWithMessage('Successfully deleted user.', $isDeleted);
         } catch (\Exception $exception) {
-            return $this->respondWithError("Exception", $exception->getMessage());
+              return $this->respondWithError( $exception->getMessage());
         }
     }
 
