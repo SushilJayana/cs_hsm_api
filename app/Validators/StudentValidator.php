@@ -20,7 +20,7 @@ class StudentValidator extends LaravelValidator
     protected $rules = [
         ValidatorInterface::RULE_CREATE => [
             "name" => ["required"],
-            "class_section_id" => ["required"],
+            "class_section_id" => ["required","numeric"],
             "gender" => ["required"],
             "address" => ["required"],
             "contact" => ["required", "numeric"],
@@ -31,7 +31,7 @@ class StudentValidator extends LaravelValidator
         ],
         ValidatorInterface::RULE_UPDATE => [
             "name" => ["sometimes", "required"],
-            "class_section_id" => ["sometimes", "required"],
+            "class_section_id" => ["sometimes", "required","numeric"],
             "gender" => ["sometimes", "required"],
             "address" => ["sometimes", "required"],
             "contact" => ["sometimes", "required", "numeric"],
@@ -42,3 +42,6 @@ class StudentValidator extends LaravelValidator
         ],
     ];
 }
+
+
+
