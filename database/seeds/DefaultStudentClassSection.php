@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class ClassSectionStudentSeeder extends Seeder
+class DefaultStudentClassSection extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,8 +11,6 @@ class ClassSectionStudentSeeder extends Seeder
      */
     public function run()
     {
-        //
-
         $class = \App\Entities\Classroom::create([
             "name" => "Nursery",
             "slug" => "nursery",
