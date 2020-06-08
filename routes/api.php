@@ -10,6 +10,8 @@ Route::group(['middleware' => ['auth:api', 'role:administrator']], function () {
     Route::resource('faculty', 'Api\v1\Application\FacultyController');
     Route::resource('class', 'Api\v1\Application\ClassroomController');
     Route::resource('section', 'Api\v1\Application\SectionController');
+
+    Route::post('class-section', 'Api\v1\Application\RelationController@save');
 });
 
 Route::group(['middleware' => ['auth:api', 'role:moderator']], function () {
