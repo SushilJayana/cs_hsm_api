@@ -15,8 +15,8 @@ class CreateSubjectsTable extends Migration
 	 */
 	public function up()
 	{
-		Schema::create('subjects', function(Blueprint $table) {
-            $table->bigIncrements('id');
+		Schema::create('hsm_subjects', function(Blueprint $table) {
+            $table->increments('id');
             $table->string('name',25);
             $table->string('slug',25)->unique();
             $table->integer('created_by')->nullable();
@@ -33,6 +33,6 @@ class CreateSubjectsTable extends Migration
 	 */
 	public function down()
 	{
-		Schema::drop('subjects');
+		Schema::drop('hsm_subjects');
 	}
 }

@@ -22,7 +22,7 @@ class Subject extends Model implements Transformable
      * @var array
      */
     protected $guard_name = 'api';
-    protected $table = "hsm_classrooms";
+    protected $table = "hsm_subjects";
 
     protected $fillable = [
         'name', 'slug', 'created_by', 'updated_by'
