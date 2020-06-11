@@ -27,4 +27,14 @@ class ClassSection extends Model implements Transformable
         'class_id', 'section_id'
     ];
 
+    public function classroom()
+    {
+        return $this->belongsTo(Classroom::class, 'class_id','id')->select(array('id', 'name'));
+
+    }
+
+    public function section()
+    {
+        return $this->belongsTo(Section::class, 'section_id')->select(array('id', 'name'));
+    }
 }

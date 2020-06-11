@@ -14,7 +14,7 @@ use Prettus\Repository\Traits\TransformableTrait;
  */
 class Classroom extends Model implements Transformable
 {
-    use TransformableTrait,SoftDeletes;
+    use TransformableTrait, SoftDeletes;
 
     /**
      * The attributes that are mass assignable.

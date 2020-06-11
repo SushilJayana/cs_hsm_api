@@ -6,6 +6,7 @@ use App\Criteria\StudentCriteria;
 use App\Repositories\StudentRepository;
 use App\Validators\StudentValidator;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Prettus\Validator\Contracts\ValidatorInterface;
 use Prettus\Validator\Exceptions\ValidatorException;
 use App\Http\Controllers\Api\v1\Shared\ApiBaseController;
@@ -32,7 +33,13 @@ class StudentController extends ApiBaseController
     public function index()
     {
 
-        $data = $this->studentRepository->all();
+        $data = DB::table('hsm_students')
+            ->join('hsm_classroom_section_relation', 'hsm_classroom_section_relation.id', '=', 'hsm_students.class_section_id')
+            ->join('hsm_classrooms', 'hsm_classrooms.id', '=', 'hsm_classroom_section_relation.class_id')
+            ->join('hsm_sections', 'hsm_sections.id', '=', 'hsm_classroom_section_relation.section_id')
+            ->select('hsm_students.*', 'hsm_classrooms.name as classroom', 'hsm_sections.name as section')
+            ->paginate();
+//        $data = $this->studentRepository->with(['classSection', 'classSection.classroom', 'classSection.section'])->paginate($limit = 2, $columns = ['*']);
         return $this->respondWithMessage('payload', $data);
     }
 
@@ -52,7 +59,7 @@ class StudentController extends ApiBaseController
                 return $this->respondWithError("Validator's Exception", $exception->getMessageBag());
             }
         } catch (\Exception $exception) {
-              return $this->respondWithError( $exception->getMessage());
+            return $this->respondWithError($exception->getMessage());
         }
     }
 
@@ -79,7 +86,7 @@ class StudentController extends ApiBaseController
             $payload = $this->studentRepository->update($request->all(), $id);
             return $this->respondWithMessage('Successfully updated student.', $payload);
         } catch (\Exception $exception) {
-              return $this->respondWithError( $exception->getMessage());
+            return $this->respondWithError($exception->getMessage());
         }
     }
 
@@ -94,7 +101,7 @@ class StudentController extends ApiBaseController
             $isDeleted = $this->studentRepository->delete($id);
             return $this->respondWithMessage('Successfully deleted student.', $isDeleted);
         } catch (\Exception $exception) {
-              return $this->respondWithError( $exception->getMessage());
+            return $this->respondWithError($exception->getMessage());
         }
     }
 

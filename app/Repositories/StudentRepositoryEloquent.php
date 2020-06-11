@@ -15,6 +15,14 @@ use App\Validators\StudentValidator;
  */
 class StudentRepositoryEloquent extends BaseRepository implements StudentRepository
 {
+
+    /**
+     * @var array
+     */
+//    protected $fieldSearchable = [
+//        'class_section_id'
+//    ];
+
     /**
      * Specify Model class name
      *
@@ -25,7 +33,7 @@ class StudentRepositoryEloquent extends BaseRepository implements StudentReposit
         return Student::class;
     }
 
-    
+
 
     /**
      * Boot up the repository, pushing criteria
@@ -34,5 +42,5 @@ class StudentRepositoryEloquent extends BaseRepository implements StudentReposit
     {
         $this->pushCriteria(app(RequestCriteria::class));
     }
-    
+
 }

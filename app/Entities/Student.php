@@ -14,7 +14,7 @@ use Prettus\Repository\Traits\TransformableTrait;
  */
 class Student extends Model implements Transformable
 {
-    use TransformableTrait,SoftDeletes;
+    use TransformableTrait, SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -29,5 +29,10 @@ class Student extends Model implements Transformable
         'name', 'email', 'age', 'gender', 'photo', 'dob', 'nationality', 'address',
         'contact', 'guardian_name', 'guardian_contact', 'guardian_address', 'guardian_occupation', 'created_by', 'updated_by'
     ];
+
+    public function classSection()
+    {
+        return $this->hasOne(ClassSection::class, 'id', 'class_section_id')->select(array('id', 'class_id', 'section_id'));
+    }
 }
 

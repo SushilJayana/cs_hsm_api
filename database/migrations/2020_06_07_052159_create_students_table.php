@@ -16,7 +16,7 @@ class CreateStudentsTable extends Migration
 	public function up()
 	{
 		Schema::create('hsm_students', function(Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->string('name',50);
             $table->integer('class_section_id')->unsigned();
             $table->string('email',50)->unique()->nullable();
