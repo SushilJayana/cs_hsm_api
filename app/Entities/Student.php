@@ -26,7 +26,7 @@ class Student extends Model implements Transformable
     protected $table = "hsm_students";
 
     protected $fillable = [
-        'name', 'email', 'age', 'gender', 'photo', 'dob', 'nationality', 'address',
+        'name', 'class_section_id', 'email', 'age', 'gender', 'photo', 'dob', 'nationality', 'address',
         'contact', 'guardian_name', 'guardian_contact', 'guardian_address', 'guardian_occupation', 'created_by', 'updated_by'
     ];
 

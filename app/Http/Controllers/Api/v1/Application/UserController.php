@@ -55,7 +55,7 @@ class UserController extends ApiBaseController
                 return $this->respondWithError("Validator's Exception", $exception->getMessageBag());
             }
         } catch (\Exception $exception) {
-              return $this->respondWithError( $exception->getMessage());
+            return $this->respondWithError($exception->getMessage());
         }
     }
 
@@ -78,12 +78,16 @@ class UserController extends ApiBaseController
     public function update(Request $request, $id)
     {
         try {
-            $this->userValidator->with($request->all())->setId($id)->passesOrFail(ValidatorInterface::RULE_UPDATE);
-            $request['password'] = ($request->password) ? Hash::make($request->password) : "";
-            $payload = $this->userRepository->update($request->all(), $id);
-            return $this->respondWithMessage('Successfully updated user.', $payload);
+            try {
+                $this->userValidator->with($request->all())->setId($id)->passesOrFail(ValidatorInterface::RULE_UPDATE);
+                $request['password'] = ($request->password) ? Hash::make($request->password) : "";
+                $payload = $this->userRepository->update($request->all(), $id);
+                return $this->respondWithMessage('Successfully updated user.', $payload);
+            } catch (ValidatorException $exception) {
+                return $this->respondWithError("Validator's Exception", $exception->getMessageBag());
+            }
         } catch (\Exception $exception) {
-              return $this->respondWithError( $exception->getMessage());
+            return $this->respondWithError($exception->getMessage());
         }
     }
 
@@ -98,7 +102,7 @@ class UserController extends ApiBaseController
             $isDeleted = $this->userRepository->delete($id);
             return $this->respondWithMessage('Successfully deleted user.', $isDeleted);
         } catch (\Exception $exception) {
-              return $this->respondWithError( $exception->getMessage());
+            return $this->respondWithError($exception->getMessage());
         }
     }
 

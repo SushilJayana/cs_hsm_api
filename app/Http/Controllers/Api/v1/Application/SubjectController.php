@@ -54,7 +54,7 @@ class SubjectController extends ApiBaseController
                 return $this->respondWithError("Validator's Exception", $exception->getMessageBag());
             }
         } catch (\Exception $exception) {
-            return $this->respondWithError( $exception->getMessage());
+            return $this->respondWithError($exception->getMessage());
         }
     }
 
@@ -77,11 +77,15 @@ class SubjectController extends ApiBaseController
     public function update(Request $request, $id)
     {
         try {
-            $this->subjectValidator->with($request->all())->setId($id)->passesOrFail(ValidatorInterface::RULE_UPDATE);
-            $payload = $this->subjectRepository->update($request->all(), $id);
-            return $this->respondWithMessage('Successfully updated subject.', $payload);
+            try {
+                $this->subjectValidator->with($request->all())->setId($id)->passesOrFail(ValidatorInterface::RULE_UPDATE);
+                $payload = $this->subjectRepository->update($request->all(), $id);
+                return $this->respondWithMessage('Successfully updated subject.', $payload);
+            } catch (ValidatorException $exception) {
+                return $this->respondWithError("Validator's Exception", $exception->getMessageBag());
+            }
         } catch (\Exception $exception) {
-              return $this->respondWithError( $exception->getMessage());
+            return $this->respondWithError($exception->getMessage());
         }
     }
 
@@ -96,7 +100,7 @@ class SubjectController extends ApiBaseController
             $isDeleted = $this->subjectRepository->delete($id);
             return $this->respondWithMessage('Successfully deleted subject.', $isDeleted);
         } catch (\Exception $exception) {
-              return $this->respondWithError( $exception->getMessage());
+            return $this->respondWithError($exception->getMessage());
         }
     }
 

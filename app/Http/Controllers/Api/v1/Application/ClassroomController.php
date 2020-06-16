@@ -56,8 +56,8 @@ class ClassroomController extends ApiBaseController
                     return (object)array("class_id" => 2, "section_id" => (int)$value);
                 }, $section_ids);
 
-            //    $class_sections = array("class_id" => 2, "section_id" => 1);
-               return $class_sections;
+                //    $class_sections = array("class_id" => 2, "section_id" => 1);
+                return $class_sections;
                 $this->classSectionRepository->create($class_sections);
                 return 1;
 
@@ -91,9 +91,13 @@ class ClassroomController extends ApiBaseController
     public function update(Request $request, $id)
     {
         try {
-            $this->classroomValidator->with($request->all())->setId($id)->passesOrFail(ValidatorInterface::RULE_UPDATE);
-            $payload = $this->classroomRepository->update($request->all(), $id);
-            return $this->respondWithMessage('Successfully updated classroom.', $payload);
+            try {
+                $this->classroomValidator->with($request->all())->setId($id)->passesOrFail(ValidatorInterface::RULE_UPDATE);
+                $payload = $this->classroomRepository->update($request->all(), $id);
+                return $this->respondWithMessage('Successfully updated classroom.', $payload);
+            } catch (ValidatorException $exception) {
+                return $this->respondWithError("Validator's Exception", $exception->getMessageBag());
+            }
         } catch (\Exception $exception) {
             return $this->respondWithError($exception->getMessage());
         }

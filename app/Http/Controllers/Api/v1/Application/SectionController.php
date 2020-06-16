@@ -52,7 +52,7 @@ class SectionController extends ApiBaseController
                 return $this->respondWithError("Validator's Exception", $exception->getMessageBag());
             }
         } catch (\Exception $exception) {
-             return $this->respondWithError( $exception->getMessage());
+            return $this->respondWithError($exception->getMessage());
         }
     }
 
@@ -75,11 +75,15 @@ class SectionController extends ApiBaseController
     public function update(Request $request, $id)
     {
         try {
-            $this->sectionValidator->with($request->all())->setId($id)->passesOrFail(ValidatorInterface::RULE_UPDATE);
-            $payload = $this->sectionRepository->update($request->all(), $id);
-            return $this->respondWithMessage('Successfully updated section.', $payload);
+            try {
+                $this->sectionValidator->with($request->all())->setId($id)->passesOrFail(ValidatorInterface::RULE_UPDATE);
+                $payload = $this->sectionRepository->update($request->all(), $id);
+                return $this->respondWithMessage('Successfully updated section.', $payload);
+            } catch (ValidatorException $exception) {
+                return $this->respondWithError("Validator's Exception", $exception->getMessageBag());
+            }
         } catch (\Exception $exception) {
-             return $this->respondWithError( $exception->getMessage());
+            return $this->respondWithError($exception->getMessage());
         }
     }
 
@@ -94,7 +98,7 @@ class SectionController extends ApiBaseController
             $isDeleted = $this->sectionRepository->delete($id);
             return $this->respondWithMessage('Successfully deleted section.', $isDeleted);
         } catch (\Exception $exception) {
-             return $this->respondWithError( $exception->getMessage());
+            return $this->respondWithError($exception->getMessage());
         }
     }
 

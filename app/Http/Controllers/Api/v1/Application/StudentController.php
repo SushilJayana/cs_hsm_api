@@ -82,9 +82,13 @@ class StudentController extends ApiBaseController
     public function update(Request $request, $id)
     {
         try {
-            $this->studentValidator->with($request->all())->setId($id)->passesOrFail(ValidatorInterface::RULE_UPDATE);
-            $payload = $this->studentRepository->update($request->all(), $id);
-            return $this->respondWithMessage('Successfully updated student.', $payload);
+            try {
+                $this->studentValidator->with($request->all())->setId($id)->passesOrFail(ValidatorInterface::RULE_UPDATE);
+                $payload = $this->studentRepository->update($request->all(), $id);
+                return $this->respondWithMessage('Successfully updated student.', $payload);
+            } catch (ValidatorException $exception) {
+                return $this->respondWithError("Validator's Exception", $exception->getMessageBag());
+            }
         } catch (\Exception $exception) {
             return $this->respondWithError($exception->getMessage());
         }
