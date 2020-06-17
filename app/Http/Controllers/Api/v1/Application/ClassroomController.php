@@ -52,17 +52,11 @@ class ClassroomController extends ApiBaseController
                 $this->classroomValidator->with($request->all())->passesOrFail(ValidatorInterface::RULE_CREATE);
 
                 $section_ids = explode(",", $request["section_ids"]);
-                $class_sections = array_map(function ($value) {
-                    return (object)array("class_id" => 2, "section_id" => (int)$value);
+                //Saving class section
+                array_map(function ($value) {
+                    $this->classSectionRepository->create(array("class_id" => 1, "section_id" => (int)$value));
                 }, $section_ids);
-
-                //    $class_sections = array("class_id" => 2, "section_id" => 1);
-                return $class_sections;
-                $this->classSectionRepository->create($class_sections);
-                return 1;
-
                 $payload = $this->classroomRepository->create($request->all());
-
                 return $this->respondWithMessage('Successfully created classroom.', $payload);
             } catch (ValidatorException $exception) {
                 return $this->respondWithError("Validator's Exception", $exception->getMessageBag());
